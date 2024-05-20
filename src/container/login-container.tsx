@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { useLogin } from "../services";
-import { CheckboxSaveId } from "../components";
+import { Button, CheckboxSaveId } from "../components";
 import { depths } from "../lib/styles";
 
 function LoginContainer() {
@@ -31,7 +31,9 @@ function LoginContainer() {
           required
         />
         <CheckboxSaveId />
-        <Button>로그인</Button>
+        <LoginButton width="100%" height="36px" radius="4px">
+          로그인
+        </LoginButton>
       </LoginForm>
     </Container>
   );
@@ -75,16 +77,8 @@ const Input = styled.input`
   border-radius: 4px;
 `;
 
-const Button = styled.button`
-  width: 100%;
-  height: 36px;
-  border: none;
-  background-color: ${({ theme }) => theme.colors.main};
-  color: white;
-  border-radius: 4px;
+const LoginButton = styled(Button)`
   margin-top: 12px;
-  cursor: pointer;
-  text-align: center;
   font-size: 14px;
   font-weight: 600;
   line-height: 17px;
