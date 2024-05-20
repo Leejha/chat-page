@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import depths from "../styles/depths";
+import { useLogin } from "../services";
 
 function LoginPage() {
+  const { formData, onChangeForm, onLogin } = useLogin();
+  const { email, password } = formData;
   return (
     <Layout>
       <WelcomeSection>
@@ -16,16 +19,30 @@ function LoginPage() {
       </WelcomeSection>
       <LoginSection>
         <Logo src="src/assets/logo.svg" alt="logo" />
-        <LoginForm>
+        <LoginForm onSubmit={onLogin}>
           <Label htmlFor="email">이메일</Label>
-          <Input type="email" id="email" required />
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            onChange={onChangeForm}
+            required
+          />
           <Label htmlFor="password">비밀번호</Label>
-          <Input type="password" id="password" required />
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={onChangeForm}
+            required
+          />
           <CheckboxContainer>
             <Checkbox type="checkbox" id="saveID" />
             <CheckboxLabel htmlFor="saveID">아이디 저장</CheckboxLabel>
           </CheckboxContainer>
-          <Button type="button">로그인</Button>
+          <Button>로그인</Button>
         </LoginForm>
       </LoginSection>
     </Layout>
