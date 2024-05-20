@@ -1,7 +1,7 @@
 /**
  * @NOTE z-index
  */
-const depths = {
+export const depths = {
   commandBar: 30000,
   editorToolbar: 925,
   header: 800,
@@ -16,5 +16,3 @@ const depths = {
   titleBarDivider: 10000,
   toasts: 5000,
 };
-
-export default depths;
