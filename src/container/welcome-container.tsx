@@ -5,7 +5,7 @@ function WelcomeContainer() {
   return (
     <Container>
       <BalloonText />
-      <Character src="src/assets/sangnyang.svg" alt="character" />
+      <Character src="src/assets/sangnyang-large.svg" alt="character" />
     </Container>
   );
 }
