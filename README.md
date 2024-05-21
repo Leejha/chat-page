@@ -1,30 +1,47 @@
-# React + TypeScript + Vite
+# 📝 인텔리어스 프론트엔드 개발자 사전 과제 - 상냥이 구현
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌고민했던 점
 
-Currently, two official plugins are available:
+#### 최대한 적은 라이브러리 사용
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### React-Query 사용 여부
 
-## Expanding the ESLint configuration
+#### bottom sheet 구현시 portal 사용 여부
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### 암시적 label과 명시적 label
 
-- Configure the top-level `parserOptions` property like this:
+#### 파일 분리
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+#### 비즈니스 로직 분리
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### router 관리
+
+#### 로그인 페이지 Grid vs Flex
+
+#### 확장성 고려
+
+## 📌개발 스택
+
+#### React
+
+#### TypeScript
+
+#### Styled-Components
+
+#### React-Router-Dom
+
+#### Tanstack-React-Query
+
+## 📌실행 방법
+
+### 프로젝트 클론
+
+$ git clone
+
+https://github.com/Leejha/sangnyang.git
+
+### 패키지 설치
+
+$ npm i
+서버 실행
+$ npm run dev
