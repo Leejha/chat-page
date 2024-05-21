@@ -1,10 +1,16 @@
 import styled from "styled-components";
+import { formatDateTime } from "../lib/utils/formatDateTime";
 
-function MessageUser() {
+interface Props {
+  createdAt: string;
+  children: React.ReactNode;
+}
+
+function MessageUser({ createdAt, children }: Props) {
   return (
     <Message>
-      <CreatedAt>오후 2:30</CreatedAt>
-      <TextBox>만나서 반가워요</TextBox>
+      <CreatedAt>{formatDateTime(createdAt)}</CreatedAt>
+      <TextBox>{children}</TextBox>
     </Message>
   );
 }

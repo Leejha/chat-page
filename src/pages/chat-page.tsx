@@ -2,6 +2,24 @@ import styled from "styled-components";
 import { Button, MessageUser } from "../components";
 import MessageSangnyang from "../components/message-sangnyang";
 
+const contents = [
+  {
+    question: "",
+    answer: "고민주제 선택하기",
+    created_at: "2023-10-30T05:00:00",
+  },
+  {
+    question: "",
+    answer: "고민주제 선택하기",
+    created_at: "2023-10-30T05:00:00",
+  },
+  {
+    question: "안녕하세요! 고민이 있어서 찾아왔어요.",
+    answer: "고민주제 선택하기",
+    created_at: "2023-10-30T05:00:00",
+  },
+];
+
 function ChatPage() {
   return (
     <Layout>
@@ -13,9 +31,31 @@ function ChatPage() {
         <ChatContainer>
           <DateBox>2023년 41월 12일</DateBox>
           <MessageList>
-            <MessageSangnyang isFirstMessage />
-            <MessageSangnyang />
-            <MessageUser />
+            <MessageSangnyang isFirstMessage createdAt="2023-10-30T05:00:00">
+              "만나서 반가워요! <br />
+              여러분의 고민을 들어줄 AI 상냥이에요. 어떤 일이 있어서
+              찾아왔나요?"
+            </MessageSangnyang>
+            {contents.map((content, index) => {
+              const { question, answer, created_at } = content;
+              return (
+                <>
+                  {question && (
+                    <MessageSangnyang
+                      createdAt={created_at}
+                      key={`sangnyang_${index}`}
+                    >
+                      {question}
+                    </MessageSangnyang>
+                  )}
+                  {answer && (
+                    <MessageUser createdAt={created_at} key={`user_${index}`}>
+                      {answer}
+                    </MessageUser>
+                  )}
+                </>
+              );
+            })}
           </MessageList>
           <InputSection>
             <Input placeholder="상냥이와 이야기를 나눠보세요!" />

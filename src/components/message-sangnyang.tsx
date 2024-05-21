@@ -1,19 +1,25 @@
 import styled from "styled-components";
 import Button from "./button";
+import { formatDateTime } from "../lib/utils/formatDateTime";
 
 interface Props {
   isFirstMessage?: boolean;
+  createdAt: string;
+  children: React.ReactNode;
 }
 
-function MessageSangnyang({ isFirstMessage = false }: Props) {
+function MessageSangnyang({
+  isFirstMessage = false,
+  createdAt,
+  children,
+}: Props) {
   return (
     <Message>
       <CharacterImage></CharacterImage>
       <Column>
         <Name>상냥이</Name>
         <TextBox>
-          만나서 반가워요! 여러분의 고민을 들어줄 AI 상냥이에요. 어떤 일이
-          있어서 찾아왔나요?
+          {children}
           {isFirstMessage && (
             <Button width="100%" height="40px">
               고민주제 선택하기
@@ -21,7 +27,7 @@ function MessageSangnyang({ isFirstMessage = false }: Props) {
           )}
         </TextBox>
       </Column>
-      <CreatedAt>오후 2:30</CreatedAt>
+      <CreatedAt>{formatDateTime(createdAt)}</CreatedAt>
     </Message>
   );
 }
