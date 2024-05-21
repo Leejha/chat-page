@@ -43,5 +43,7 @@ https://github.com/Leejha/sangnyang.git
 ### 패키지 설치
 
 $ npm i
-서버 실행
+
+###서버 실행
+
 $ npm run dev
