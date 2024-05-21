@@ -1,23 +1,23 @@
 import styled, { css } from "styled-components";
 import Button from "./button";
-import { useState } from "react";
 import BottomSheetTemplate from "./bottom-sheet-template";
 import TopicSelectBox from "./topic-select-box";
 
 interface Props {
-  onToggleBottomSheet: () => void;
+  selectedTopic: string;
+  onChangeTopic: (value: string) => void;
+  question: string;
+  onChangeQuestion: (value: string) => void;
+  onClickSelect: () => void;
 }
 
-function TopicBottomSheet({ onToggleBottomSheet }: Props) {
-  const [selectedTopic, setTopic] = useState("");
-  const onChangeTopic = (value: string) => {
-    setTopic(value);
-  };
-  const [question, setQuestion] = useState("");
-  const onChangeQuestion = (value: string) => {
-    setQuestion(value);
-  };
-
+function TopicBottomSheet({
+  selectedTopic,
+  onChangeTopic,
+  question,
+  onChangeQuestion,
+  onClickSelect,
+}: Props) {
   return (
     <BottomSheetTemplate width="480px" height="622px" onToggleModal={() => {}}>
       <Inner>
@@ -38,7 +38,7 @@ function TopicBottomSheet({ onToggleBottomSheet }: Props) {
           width="100%"
           height="40px"
           disabled={selectedTopic === "" || question === ""}
-          onClick={onToggleBottomSheet}
+          onClick={onClickSelect}
         >
           확인
         </CheckButton>
@@ -90,9 +90,9 @@ const CheckButton = styled(Button)`
   ${({ theme, disabled }) => css`
     color: ${disabled ? theme.colors.black_03 : "white"};
     background-color: ${disabled ? theme.colors.black_04 : theme.colors.main};
+    margin-top: 16px;
+    text-align: center;
   `}
-  margin-top: 16px;
-  text-align: center;
 `;
 
 export default TopicBottomSheet;
