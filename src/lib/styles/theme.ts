@@ -1,5 +1,6 @@
 const colors = {
   main: "#7761FF",
+  sub: "#EBEEFF",
   border_01: "#D6DDFF",
   border_02: "#D9D9D9",
   black_01: "#222222",
