@@ -1,16 +1,17 @@
 import styled from "styled-components";
 import Button from "./button";
-import { formatDateTime } from "../lib/utils/formatDateTime";
 
 interface Props {
   isFirstMessage?: boolean;
   createdAt: string;
+  onToggleBottomSheet?: () => void;
   children: React.ReactNode;
 }
 
 function MessageSangnyang({
   isFirstMessage = false,
   createdAt,
+  onToggleBottomSheet,
   children,
 }: Props) {
   return (
@@ -21,13 +22,13 @@ function MessageSangnyang({
         <TextBox>
           {children}
           {isFirstMessage && (
-            <Button width="100%" height="40px">
+            <Button width="100%" height="40px" onClick={onToggleBottomSheet}>
               고민주제 선택하기
             </Button>
           )}
         </TextBox>
       </Column>
-      <CreatedAt>{formatDateTime(createdAt)}</CreatedAt>
+      <CreatedAt>{createdAt}</CreatedAt>
     </Message>
   );
 }
@@ -35,8 +36,6 @@ function MessageSangnyang({
 const Message = styled.li`
   display: flex;
 `;
-
-const CharacterWrapper = styled.div``;
 
 const Column = styled.div`
   margin-left: 8px;

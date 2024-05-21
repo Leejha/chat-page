@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { formatDateTime } from "../lib/utils/formatDateTime";
 
 interface Props {
   createdAt: string;
@@ -9,7 +8,7 @@ interface Props {
 function MessageUser({ createdAt, children }: Props) {
   return (
     <Message>
-      <CreatedAt>{formatDateTime(createdAt)}</CreatedAt>
+      <CreatedAt>{createdAt}</CreatedAt>
       <TextBox>{children}</TextBox>
     </Message>
   );
