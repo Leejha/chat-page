@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { Button, MessageUser } from "../components";
+import { Button, MessageUser, TopicBottomSheet } from "../components";
 import MessageSangnyang from "../components/message-sangnyang";
+import { useToggle } from "../hooks";
 
 const contents = [
   {
@@ -21,6 +22,8 @@ const contents = [
 ];
 
 function ChatPage() {
+  const [toggleBottomSheet, onToggleBottomSheet] = useToggle(true);
+
   return (
     <Layout>
       <Content>
@@ -43,13 +46,13 @@ function ChatPage() {
                   {question && (
                     <MessageSangnyang
                       createdAt={created_at}
-                      key={`sangnyang_${index}`}
+                      key={`sangnyang-${index}`}
                     >
                       {question}
                     </MessageSangnyang>
                   )}
                   {answer && (
-                    <MessageUser createdAt={created_at} key={`user_${index}`}>
+                    <MessageUser createdAt={created_at} key={`user-${index}`}>
                       {answer}
                     </MessageUser>
                   )}
@@ -62,6 +65,9 @@ function ChatPage() {
             <InputButton width="32px" height="32px"></InputButton>
           </InputSection>
         </ChatContainer>
+        {toggleBottomSheet && (
+          <TopicBottomSheet onToggleBottomSheet={onToggleBottomSheet} />
+        )}
       </Content>
     </Layout>
   );
