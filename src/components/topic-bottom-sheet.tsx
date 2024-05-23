@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components";
 import Button from "./button";
 import BottomSheetTemplate from "./bottom-sheet-template";
-import TopicSelectBox from "./topic-select-box";
+import TopicSelect from "./topic-select";
+import { Topic } from "../services/use-mutation-chat";
 
 interface Props {
-  selectedTopic: string;
-  onChangeTopic: (value: string) => void;
+  selectedTopic: Topic;
+  onChangeTopic: (value: Topic) => void;
   question: string;
   onChangeQuestion: (value: string) => void;
   onClickSelect: () => void;
@@ -23,9 +24,9 @@ function TopicBottomSheet({
       <Inner>
         <Title>고민 주제 선택하기</Title>
         <SubTitle>고민 주제</SubTitle>
-        <TopicSelectBox
-          defaultOption={selectedTopic}
-          onChangeSortOption={onChangeTopic}
+        <TopicSelect
+          selectedTopic={selectedTopic}
+          onChangeTopic={onChangeTopic}
         />
         <EmptySpace />
         <SubTitle>고민 내용</SubTitle>
@@ -37,7 +38,7 @@ function TopicBottomSheet({
         <CheckButton
           width="100%"
           height="40px"
-          disabled={selectedTopic === "" || question === ""}
+          disabled={!selectedTopic || question === ""}
           onClick={onClickSelect}
         >
           확인

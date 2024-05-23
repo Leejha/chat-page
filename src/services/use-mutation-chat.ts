@@ -8,6 +8,18 @@ import {
 } from "../lib";
 import { formatDateTime } from "../lib/utils/format-date-time";
 
+export const TOPIC_LIST = [
+  { value: "career", label: "학업진로" },
+  { value: "relationship", label: "대인관계" },
+  { value: "addiction", label: "인터넷-스마트폰 중독" },
+  { value: "family", label: "가족" },
+] as const;
+
+export interface Topic {
+  value: string;
+  label: string;
+}
+
 interface CurrentChatList extends PostChatResponse {
   createdAt: string;
 }
@@ -15,8 +27,11 @@ interface CurrentChatList extends PostChatResponse {
 export default function useMutationChat() {
   const queryClient = useQueryClient();
 
-  const [selectedTopic, setTopic] = useState("");
-  const onChangeTopic = (value: string) => {
+  const [selectedTopic, setTopic] = useState<Topic>({
+    value: "",
+    label: "",
+  });
+  const onChangeTopic = (value: Topic) => {
     setTopic(value);
   };
 
@@ -27,14 +42,12 @@ export default function useMutationChat() {
   const onResetQuestion = () => {
     setQuestion("");
   };
-
   const [currentChatList, setCurrentChatList] = useState<CurrentChatList[]>([]);
   const onResetCurrentChatList = () => {
     setCurrentChatList([]);
   };
   const currentDateTime = new Date().toISOString();
   const formattedTime = formatDateTime(currentDateTime);
-
   const {
     data: postChatResponse,
     mutate: postChat,
@@ -53,7 +66,6 @@ export default function useMutationChat() {
       });
     },
   });
-
   return {
     selectedTopic,
     onChangeTopic,
