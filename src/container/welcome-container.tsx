@@ -12,7 +12,7 @@ function WelcomeContainer() {
 
 const Container = styled.section`
   flex: 1;
-  background-color: #ebeeff;
+  background-color: ${({ theme }) => theme.colors.sub};
   height: 100vh;
   position: relative;
 `;
