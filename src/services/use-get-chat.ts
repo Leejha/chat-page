@@ -5,18 +5,27 @@ import { useEffect, useRef, useState } from "react";
 
 export default function useGetChat() {
   const queryClient = useQueryClient();
-  const [isWheelFetching, setWheelFetching] = useState(true);
+  const [isWheelFetching, setWheelFetching] = useState<boolean>(true);
+  const scrollRef = useRef<HTMLUListElement>(null);
+  const [scrollHeight, setScrollHeight] = useState<number>(0);
 
+  /**
+   * @description 이전 채팅 기록을 무한 스크롤 방식으로 로드
+   */
   const { data, fetchNextPage } = useInfiniteQuery({
     queryKey: reactQueryKeys.getChatLogs({}),
     initialPageParam: 1,
-    queryFn: ({ pageParam }: { pageParam: number }) =>
+    queryFn: ({ pageParam }) =>
       getChatAPI({
         page: pageParam,
         num: 10,
       }),
     getNextPageParam: (_, __, lastPageParam) => lastPageParam + 1,
     enabled: false,
+  });
+
+  const [subscribe] = useInfiniteScroll(() => {
+    !isWheelFetching && fetchNextPage();
   });
 
   const previousChatList: GetChatResponse[] =
@@ -29,12 +38,9 @@ export default function useGetChat() {
     });
   };
 
-  const [subscribe] = useInfiniteScroll(() => {
-    !isWheelFetching && fetchNextPage();
-  });
-
-  const scrollRef = useRef<HTMLUListElement>(null);
-  const [scrollHeight, setScrollHeight] = useState<number>(0);
+  /**
+   * @description 역방향 무한스크롤시 스크롤 위치를 유지하기 위한 로직
+   */
 
   useEffect(() => {
     if (!scrollRef) return;
