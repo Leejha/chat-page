@@ -1,11 +1,68 @@
-import { useQuery } from "@tanstack/react-query";
-import { GetChatRequest, getChatAPI, reactQueryKeys } from "../lib";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  GetChatRequest,
+  GetChatResponse,
+  getChatAPI,
+  reactQueryKeys,
+} from "../lib";
+import { useInfiniteScroll, useScroll } from "../hooks";
+import { useEffect, useRef, useState } from "react";
 
-export default function useGetChat(params: GetChatRequest) {
-  const { data } = useQuery({
-    queryKey: reactQueryKeys.getChatLogs(params),
-    queryFn: () => getChatAPI(params),
+export default function useGetChat({ num }: Pick<GetChatRequest, "num">) {
+  const queryClient = useQueryClient();
+  const [isWheelFetching, setWheelFetching] = useState(true);
+
+  const { data, fetchNextPage } = useInfiniteQuery({
+    queryKey: reactQueryKeys.getChatLogs({}),
+    initialPageParam: 1,
+    queryFn: ({ pageParam }: { pageParam: number }) =>
+      getChatAPI({
+        page: pageParam,
+        num,
+      }),
+    getNextPageParam: (_, __, lastPageParam) => lastPageParam + 1,
+    enabled: false,
   });
-  const chatLogs = data?.content;
-  return { chatLogs };
+
+  const previousChatList: GetChatResponse[] =
+    data?.pages.flatMap((page) => page.content) ?? [];
+
+  const onResetPreviousChatList = () => {
+    setWheelFetching(true);
+    queryClient.resetQueries({
+      queryKey: reactQueryKeys.getChatLogs({}),
+    });
+  };
+
+  const [subscribe] = useInfiniteScroll(() => {
+    !isWheelFetching && fetchNextPage();
+  });
+
+  const scrollRef = useRef<HTMLUListElement>(null);
+  const [scrollHeight, setScrollHeight] = useState<number>(0);
+
+  useEffect(() => {
+    if (!scrollRef) return;
+
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollHeight;
+      setScrollHeight(scrollRef.current.scrollHeight);
+    }
+  }, [data?.pages]);
+
+  const handleScroll = () => {
+    if (!isWheelFetching) return;
+    fetchNextPage();
+    setWheelFetching(false);
+  };
+
+  const { onScroll } = useScroll<HTMLUListElement>(handleScroll);
+
+  return {
+    previousChatList,
+    subscribe,
+    scrollRef,
+    onScroll,
+    onResetPreviousChatList,
+  };
 }
