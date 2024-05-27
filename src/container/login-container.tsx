@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { useLogin } from "../services";
-import { Button, CheckboxSaveId } from "../components";
+import { Button, Checkbox } from "../components";
 import { depths } from "../lib/styles";
 
 function LoginContainer() {
@@ -29,7 +29,7 @@ function LoginContainer() {
           onChange={onChangeForm}
           required
         />
-        <CheckboxSaveId />
+        <Checkbox>아이디 저장</Checkbox>
         <LoginButton width="100%" height="36px" radius="4px">
           로그인
         </LoginButton>
@@ -40,13 +40,13 @@ function LoginContainer() {
 
 const Container = styled.section`
   width: 480px;
-  z-index: ${depths.overlay};
-  background-color: white;
   padding: 0 80px;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: ${depths.overlay};
 `;
 
 const Logo = styled.img`
@@ -64,16 +64,16 @@ const Label = styled.label`
   font-weight: 600;
   line-height: 17px;
   text-align: left;
-  color: #666666;
   display: inline-block;
+  color: ${({ theme }) => theme.colors.black_02};
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 10px;
   margin: 8px 0 12px 0;
-  border: 1px solid ${({ theme }) => theme.colors.border_02};
   border-radius: 4px;
+  border: 1px solid ${({ theme }) => theme.colors.border_02};
 `;
 
 const LoginButton = styled(Button)`

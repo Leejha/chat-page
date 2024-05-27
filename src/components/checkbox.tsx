@@ -1,10 +1,11 @@
+import { PropsWithChildren } from "react";
 import styled from "styled-components";
 
-function CheckboxSaveId() {
+function Checkbox({ children }: PropsWithChildren) {
   return (
     <Container>
-      <Checkbox type="checkbox" id="saveID" />
-      <CheckboxLabel htmlFor="saveID">아이디 저장</CheckboxLabel>
+      <CheckboxStyled type="checkbox" id="checkbox" />
+      <Label htmlFor="checkbox">{children}</Label>
     </Container>
   );
 }
@@ -14,7 +15,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Checkbox = styled.input`
+const CheckboxStyled = styled.input`
   width: 18px;
   height: 18px;
   border-radius: 2px;
@@ -28,7 +29,7 @@ const Checkbox = styled.input`
   }
 `;
 
-const CheckboxLabel = styled.label`
+const Label = styled.label`
   text-align: left;
   font-size: 14px;
   line-height: 17px;
@@ -38,4 +39,4 @@ const CheckboxLabel = styled.label`
   color: ${({ theme }) => theme.colors.black_02};
 `;
 
-export default CheckboxSaveId;
+export default Checkbox;
