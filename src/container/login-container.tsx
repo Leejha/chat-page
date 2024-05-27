@@ -5,8 +5,7 @@ import { Button, CheckboxSaveId } from "../components";
 import { depths } from "../lib/styles";
 
 function LoginContainer() {
-  const { formData, onChangeForm, onLogin } = useLogin();
-  const { email, password } = formData;
+  const { email, password, onChangeForm, onLogin } = useLogin();
 
   return (
     <Container>
