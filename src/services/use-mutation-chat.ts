@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import {
-  PostChatResponse,
+  GetChatResponse,
   postChatAPI,
   reactQueryKeys,
   saveChatAPI,
@@ -18,10 +18,6 @@ export const TOPIC_LIST = [
 export interface Topic {
   value: string;
   label: string;
-}
-
-interface CurrentChatList extends PostChatResponse {
-  createdAt: string;
 }
 
 export default function useMutationChat() {
@@ -42,12 +38,15 @@ export default function useMutationChat() {
   const onResetQuestion = () => {
     setQuestion("");
   };
-  const [currentChatList, setCurrentChatList] = useState<CurrentChatList[]>([]);
+
+  const [currentChatList, setCurrentChatList] = useState<GetChatResponse[]>([]);
   const onResetCurrentChatList = () => {
     setCurrentChatList([]);
   };
+
   const currentDateTime = new Date().toISOString();
   const formattedTime = formatDateTime(currentDateTime);
+
   const {
     data: postChatResponse,
     mutate: postChat,
@@ -66,6 +65,7 @@ export default function useMutationChat() {
       });
     },
   });
+
   return {
     selectedTopic,
     onChangeTopic,
@@ -75,6 +75,7 @@ export default function useMutationChat() {
     postChatResponse,
     postChat,
     currentChatList,
+    setCurrentChatList,
     onResetCurrentChatList,
     isPending,
   };
