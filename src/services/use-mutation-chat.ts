@@ -55,10 +55,24 @@ export default function useMutationChat() {
     mutationFn: () => postChatAPI({ question }),
     onSuccess: ({ question, answer }) => {
       saveChatAPI({ question, answer });
+      selectedTopic.label &&
+        setCurrentChatList((prev) => [
+          ...prev,
+          {
+            question: selectedTopic.label,
+            answer: "",
+            createdAt: formattedTime,
+          },
+        ]);
       setCurrentChatList((prev) => [
         ...prev,
-        { question, answer, createdAt: formattedTime },
+        {
+          question,
+          answer,
+          createdAt: formattedTime,
+        },
       ]);
+      setTopic({ value: "", label: "" });
       onResetQuestion();
       queryClient.invalidateQueries({
         queryKey: reactQueryKeys.getChatLogs({}),

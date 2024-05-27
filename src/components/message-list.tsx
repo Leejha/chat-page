@@ -68,9 +68,14 @@ function MessageList({
             <MessageUser createdAt={createdAt} key={`user-${index}`}>
               {question}
             </MessageUser>
-            <MessageSangnyang createdAt={createdAt} key={`sangnyang-${index}`}>
-              {answer}
-            </MessageSangnyang>
+            {answer && (
+              <MessageSangnyang
+                createdAt={createdAt}
+                key={`sangnyang-${index}`}
+              >
+                {answer}
+              </MessageSangnyang>
+            )}
           </>
         );
       })}
