@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 interface Props {
-  onResetCurrentChatList: () => void;
+  onResetChatList: () => void;
 }
 
-function Header({ onResetCurrentChatList }: Props) {
+function Header({ onResetChatList }: Props) {
   return (
     <Container>
       <img src="src/assets/menu-icon.svg" alt="menu" />
-      <Button onClick={onResetCurrentChatList}>
+      <Button onClick={onResetChatList}>
         <img src="src/assets/new-icon.svg" alt="new" />
       </Button>
     </Container>

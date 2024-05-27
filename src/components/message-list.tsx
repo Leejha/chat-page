@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import MessageUser from "./message-user";
 import MessageSangnyang from "./message-sangnyang";
-import { formatDateTime } from "../lib";
+import { formatDateTime, getCurrentDate } from "../lib";
+import { MutableRefObject, WheelEvent } from "react";
 
 interface Props {
   onToggleBottomSheet: () => void;
@@ -10,14 +11,47 @@ interface Props {
     answer: string;
     createdAt: string;
   }[];
+  previousChatList: {
+    question: string;
+    answer: string;
+    createdAt: string;
+  }[];
+  scrollRef: MutableRefObject<HTMLUListElement | null>;
+  onScroll: (e: WheelEvent<HTMLUListElement>) => void;
+  subscribe: (node: HTMLElement | null) => void;
 }
 
-function MessageList({ onToggleBottomSheet, currentChatList }: Props) {
+function MessageList({
+  onToggleBottomSheet,
+  currentChatList,
+  previousChatList,
+  scrollRef,
+  onScroll,
+  subscribe,
+}: Props) {
   const currentDateTime = new Date().toISOString();
   const formattedTime = formatDateTime(currentDateTime);
 
   return (
-    <List>
+    <List ref={scrollRef} onWheel={onScroll}>
+      <div ref={subscribe}></div>
+      <DateBox>{getCurrentDate()}</DateBox>
+      {previousChatList.map((chat, index) => {
+        const { question, answer, createdAt } = chat;
+        return (
+          <>
+            <MessageUser createdAt={createdAt} key={`before-user-${index}`}>
+              {question}
+            </MessageUser>
+            <MessageSangnyang
+              createdAt={createdAt}
+              key={`before-sangnyang-${index}`}
+            >
+              {answer}
+            </MessageSangnyang>
+          </>
+        );
+      })}
       <MessageSangnyang
         isFirstMessage
         createdAt={formattedTime}
@@ -44,10 +78,23 @@ function MessageList({ onToggleBottomSheet, currentChatList }: Props) {
   );
 }
 
+const DateBox = styled.div`
+  width: 104px;
+  height: 24px;
+  padding: 4px 0;
+  border-radius: 16px;
+  background-color: ${({ theme }) => theme.colors.black_04};
+  margin: 28px auto;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: -0.04em;
+  text-align: center;
+`;
+
 const List = styled.ul`
   flex: 1;
   overflow: auto;
-  margin-top: 24px;
 `;
 
 export default MessageList;

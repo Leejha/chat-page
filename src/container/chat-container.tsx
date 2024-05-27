@@ -6,9 +6,7 @@ import {
   TopicBottomSheet,
 } from "../components";
 import { useToggle } from "../hooks";
-
-import { useMutationChat } from "../services";
-import { getCurrentDate } from "../lib";
+import { useGetChat, useMutationChat } from "../services";
 
 function ChatContainer() {
   const [toggleBottomSheet, onToggleBottomSheet] = useToggle(true);
@@ -24,16 +22,33 @@ function ChatContainer() {
     isPending,
   } = useMutationChat();
 
+  const {
+    previousChatList,
+    onScroll,
+    scrollRef,
+    subscribe,
+    onResetPreviousChatList,
+  } = useGetChat({
+    num: 10,
+  });
+
   return (
     <>
-      <Header onResetCurrentChatList={onResetCurrentChatList} />
+      <Header
+        onResetChatList={() => {
+          onResetCurrentChatList();
+          onResetPreviousChatList();
+        }}
+      />
       <Container>
-        <DateBox>{getCurrentDate()}</DateBox>
         <MessageList
           currentChatList={currentChatList}
+          previousChatList={previousChatList}
           onToggleBottomSheet={onToggleBottomSheet}
+          scrollRef={scrollRef}
+          onScroll={onScroll}
+          subscribe={subscribe}
         />
-
         <InputSection
           question={question}
           onChangeQuestion={onChangeQuestion}
@@ -56,20 +71,6 @@ function ChatContainer() {
     </>
   );
 }
-
-const DateBox = styled.div`
-  width: 104px;
-  height: 24px;
-  padding: 4px 0;
-  border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.black_04};
-  margin: 28px auto 0 auto;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 17px;
-  letter-spacing: -0.04em;
-  text-align: center;
-`;
 
 const Container = styled.main`
   position: relative;
