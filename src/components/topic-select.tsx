@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import { useToggle } from "../hooks";
 import { Select } from "./select";
-import { TOPIC_LIST, Topic } from "../services/use-mutation-chat";
+import { TOPIC_LIST, Topic } from "../lib";
 
 interface Props {
   selectedTopic: Topic;

@@ -1,19 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Chat, postChatAPI, reactQueryKeys, saveChatAPI } from "../lib";
+import { Chat, Topic, postChatAPI, reactQueryKeys, saveChatAPI } from "../lib";
 import { formatDateTime } from "../lib/utils/format-date-time";
-
-export const TOPIC_LIST = [
-  { value: "career", label: "학업진로" },
-  { value: "relationship", label: "대인관계" },
-  { value: "addiction", label: "인터넷-스마트폰 중독" },
-  { value: "family", label: "가족" },
-] as const;
-
-export interface Topic {
-  value: string;
-  label: string;
-}
 
 export default function useMutationChat() {
   const queryClient = useQueryClient();
