@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import { GetChatResponse, getChatAPI, reactQueryKeys } from "../lib";
+import { getChatAPI, reactQueryKeys } from "../lib";
 import { useInfiniteScroll, useScroll } from "../hooks";
 import { useEffect, useRef, useState } from "react";
 
@@ -28,8 +28,7 @@ export default function useGetChat() {
     !isWheelFetching && fetchNextPage();
   });
 
-  const previousChatList: GetChatResponse[] =
-    data?.pages.flatMap((page) => page.content) ?? [];
+  const previousChatList = data?.pages.flatMap((page) => page.content) ?? [];
 
   const onResetPreviousChatList = () => {
     setWheelFetching(true);

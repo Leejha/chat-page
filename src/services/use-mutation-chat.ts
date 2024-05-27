@@ -1,11 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import {
-  GetChatResponse,
-  postChatAPI,
-  reactQueryKeys,
-  saveChatAPI,
-} from "../lib";
+import { Chat, postChatAPI, reactQueryKeys, saveChatAPI } from "../lib";
 import { formatDateTime } from "../lib/utils/format-date-time";
 
 export const TOPIC_LIST = [
@@ -39,7 +34,7 @@ export default function useMutationChat() {
     setQuestion("");
   };
 
-  const [currentChatList, setCurrentChatList] = useState<GetChatResponse[]>([]);
+  const [currentChatList, setCurrentChatList] = useState<Chat[]>([]);
   const onResetCurrentChatList = () => {
     setCurrentChatList([]);
   };

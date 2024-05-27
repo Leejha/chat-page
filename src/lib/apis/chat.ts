@@ -8,33 +8,33 @@ export interface GetChatRequest {
 export interface Chat {
   question: string;
   answer: string;
-}
-
-export interface GetChatResponse extends Chat {
   createdAt: string;
 }
 
+interface GetChatResponse {
+  page: number;
+  content: Chat[];
+}
+
 export const getChatAPI = async (getChatRequest: GetChatRequest) => {
-  const response = await http.get("/chatlogs", {
+  const response = await http.get<GetChatResponse>("/chatlogs", {
     params: getChatRequest,
   });
   return response.data;
 };
 
-export interface PostChatRequest {
+interface PostChatRequest {
   question: string;
 }
-export interface PostChatResponse extends Chat {}
+
+interface PostChatResponse extends Omit<Chat, "createdAt"> {}
 
 export const postChatAPI = async (postChatRequest: PostChatRequest) => {
-  const response = await http.post("/chat", postChatRequest);
+  const response = await http.post<PostChatResponse>("/chat", postChatRequest);
   return response.data;
 };
 
-interface SaveChatRequest {
-  question: string;
-  answer: string;
-}
+interface SaveChatRequest extends Omit<Chat, "createdAt"> {}
 
 export const saveChatAPI = async (saveChatRequest: SaveChatRequest) => {
   const response = await http.post("/chatlogs", saveChatRequest);
