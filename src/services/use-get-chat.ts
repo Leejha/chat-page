@@ -1,14 +1,9 @@
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  GetChatRequest,
-  GetChatResponse,
-  getChatAPI,
-  reactQueryKeys,
-} from "../lib";
+import { GetChatResponse, getChatAPI, reactQueryKeys } from "../lib";
 import { useInfiniteScroll, useScroll } from "../hooks";
 import { useEffect, useRef, useState } from "react";
 
-export default function useGetChat({ num }: Pick<GetChatRequest, "num">) {
+export default function useGetChat() {
   const queryClient = useQueryClient();
   const [isWheelFetching, setWheelFetching] = useState(true);
 
@@ -18,7 +13,7 @@ export default function useGetChat({ num }: Pick<GetChatRequest, "num">) {
     queryFn: ({ pageParam }: { pageParam: number }) =>
       getChatAPI({
         page: pageParam,
-        num,
+        num: 10,
       }),
     getNextPageParam: (_, __, lastPageParam) => lastPageParam + 1,
     enabled: false,

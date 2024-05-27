@@ -28,9 +28,7 @@ function ChatContainer() {
     scrollRef,
     subscribe,
     onResetPreviousChatList,
-  } = useGetChat({
-    num: 10,
-  });
+  } = useGetChat();
 
   return (
     <>
