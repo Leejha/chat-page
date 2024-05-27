@@ -34,8 +34,8 @@ const CheckboxLabel = styled.label`
   line-height: 17px;
   font-weight: 500;
   text-align: left;
-  color: #666666;
   display: inline-block;
+  color: ${({ theme }) => theme.colors.black_02};
 `;
 
 export default CheckboxSaveId;
