@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {
+  ChatSection,
   Header,
   InputSection,
-  MessageList,
   TopicBottomSheet,
 } from "../components";
 import { useToggle } from "../hooks";
@@ -39,7 +39,7 @@ function ChatContainer() {
         }}
       />
       <Container>
-        <MessageList
+        <ChatSection
           currentChatList={currentChatList}
           previousChatList={previousChatList}
           onToggleBottomSheet={onToggleBottomSheet}
