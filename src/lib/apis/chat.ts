@@ -27,7 +27,7 @@ interface PostChatRequest {
   question: string;
 }
 
-interface PostChatResponse extends Omit<Chat, "createdAt"> {}
+export interface PostChatResponse extends Omit<Chat, "createdAt"> {}
 
 export const postChatAPI = async (postChatRequest: PostChatRequest) => {
   const response = await http.post<PostChatResponse>("/chat", postChatRequest);
