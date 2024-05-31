@@ -9,22 +9,17 @@ interface Props {
 function ChatList({ chatList }: Props) {
   return (
     <>
-      {chatList.map((chat, index) => {
+      {chatList.map((chat) => {
         const { question, answer, createdAt } = chat;
         return (
-          <>
-            <MessageUser createdAt={createdAt} key={`before-user-${index}`}>
-              {question}
-            </MessageUser>
+          <div key={self.crypto.randomUUID()}>
+            <MessageUser createdAt={createdAt}>{question}</MessageUser>
             {answer && (
-              <MessageSangnyang
-                createdAt={createdAt}
-                key={`before-sangnyang-${index}`}
-              >
+              <MessageSangnyang createdAt={createdAt}>
                 {answer}
               </MessageSangnyang>
             )}
-          </>
+          </div>
         );
       })}
     </>
