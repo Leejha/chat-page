@@ -1,5 +1,5 @@
 import { Chat } from "../lib";
-import MessageSangnyang from "./message-sangnyang";
+import MessageCharacter from "./message-character";
 import MessageUser from "./message-user";
 
 interface Props {
@@ -15,9 +15,9 @@ function ChatList({ chatList }: Props) {
           <div key={self.crypto.randomUUID()}>
             <MessageUser createdAt={createdAt}>{question}</MessageUser>
             {answer && (
-              <MessageSangnyang createdAt={createdAt}>
+              <MessageCharacter createdAt={createdAt}>
                 {answer}
-              </MessageSangnyang>
+              </MessageCharacter>
             )}
           </div>
         );

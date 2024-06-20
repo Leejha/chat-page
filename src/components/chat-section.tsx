@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MessageSangnyang from "./message-sangnyang";
+import MessageCharacter from "./message-character";
 import ChatList from "./chat-list";
 import { formatDateTime, getCurrentDate } from "../lib";
 import { MutableRefObject, WheelEvent } from "react";
@@ -37,15 +37,15 @@ function ChatSection({
       <div ref={subscribe}></div>
       <DateBox>{getCurrentDate()}</DateBox>
       <ChatList chatList={previousChatList} />
-      <MessageSangnyang
+      <MessageCharacter
         isFirstMessage
         createdAt={formattedTime}
         onToggleBottomSheet={onToggleBottomSheet}
       >
         "만나서 반가워요! <br />
-        여러분의 고민을 들어줄 AI 상냥이에요. <br />
+        여러분의 고민을 들어줄 AI 캐릭터에요. <br />
         어떤 일이 있어서 찾아왔나요?"
-      </MessageSangnyang>
+      </MessageCharacter>
       <ChatList chatList={currentChatList} />
     </List>
   );

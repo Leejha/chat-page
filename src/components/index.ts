@@ -1,7 +1,7 @@
 export { default as BalloonText } from "./balloon-text";
 export { default as Checkbox } from "./checkbox.tsx";
 export { default as Button } from "./button.tsx";
-export { default as MessageSangnyang } from "./message-sangnyang.tsx";
+export { default as MessageCharacter } from "./message-character.tsx";
 export { default as MessageUser } from "./message-user.tsx";
 export { default as TopicBottomSheet } from "./topic-bottom-sheet.tsx";
 export { default as Header } from "./header.tsx";

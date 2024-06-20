@@ -6,7 +6,7 @@ function BalloonText() {
       스마트한 선생님을 위한 <br />
       스마트한 청소년 위기관리 솔루션 <br />
       <div>
-        <MainColor>상냥이</MainColor>에 오신 것을 환영합니다!
+        <MainColor>캐릭터</MainColor>에 오신 것을 환영합니다!
       </div>
     </Balloon>
   );

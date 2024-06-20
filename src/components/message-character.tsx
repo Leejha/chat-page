@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-function MessageSangnyang({
+function MessageCharacter({
   isFirstMessage = false,
   createdAt,
   onToggleBottomSheet,
@@ -18,7 +18,7 @@ function MessageSangnyang({
     <Message>
       <CharacterImage></CharacterImage>
       <Column>
-        <Name>상냥이</Name>
+        <Name>캐릭터</Name>
         <TextBox>
           {children}
           {isFirstMessage && (
@@ -46,7 +46,7 @@ const CharacterImage = styled.div`
   width: 48px;
   height: 48px;
   border-radius: 100%;
-  background: url("src/assets/sangnyang-small.png")
+  background: url("src/assets/character-small.png")
     ${({ theme }) => theme.colors.sub} no-repeat center;
 `;
 
@@ -72,4 +72,4 @@ const CreatedAt = styled.div`
   margin-left: 4px;
 `;
 
-export default MessageSangnyang;
+export default MessageCharacter;

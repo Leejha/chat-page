@@ -48,12 +48,12 @@
 
 $ git clone
 
-https://github.com/Leejha/sangnyang.git
+https://github.com/Leejha/chat-practice.git
 
 ### 패키지 설치
 
 $ npm i
 
-###서버 실행
+### 서버 실행
 
 $ npm run dev

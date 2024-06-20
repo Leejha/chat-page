@@ -22,7 +22,7 @@ function InputSection({
       }}
     >
       <Input
-        placeholder="상냥이와 이야기를 나눠보세요!"
+        placeholder="캐릭터와 이야기를 나눠보세요!"
         value={question}
         onChange={(e) => onChangeQuestion(e.target.value)}
         disabled={isPending}
