@@ -1,12 +1,12 @@
 import { LocalStorageManager } from "./utils";
 
-export const SERVER_URL = "http://35.216.122.163:8000";
+export const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 interface Auth {
   access_token: string;
   token_type: string;
 }
-const USER_STORAGE_KEY = "SANNGYANG_USER";
+const USER_STORAGE_KEY = "SERVICE_NAME_USER";
 export const userStorage = new LocalStorageManager<Auth>(USER_STORAGE_KEY);
 
 export const TOPIC_LIST = [
